@@ -41,10 +41,8 @@ def get_token_data(token):
         user = User.objects.get(email=payload['email'])
     except Exception as error:
         exception_mapper = {
-            jwt.ExpiredSignatureError: jwt_errors['token_expired'],
-            jwt.DecodeError: jwt_errors['invalid_token'],
-            jwt.InvalidIssuerError: jwt_errors['invalid_secret'],
-            User.DoesNotExist: jwt_errors['token_user_not_found']
+            jwt.ExpiredSignatureError: "Token expired. Please login to get a new token.",
+            jwt.DecodeError: "Authorization failed due to an Invalid token.",
         }
         message = exception_mapper.get(
             type(error), 'Authorization failed.')

@@ -18,11 +18,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
         validators=[
             UniqueValidator(
                 queryset=User.objects.all(),
-                message=error_dict['already_exist'].format("Email"),
+                message="Email already exist",
             )
         ],
         error_messages={
-            'required': error_dict['required'],
+            'required': "Email is a required field",
         }
     )
     # Ensure passwords are at least 8 characters long, no longer than 128
@@ -35,10 +35,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         allow_null=False,
         write_only=True,
         error_messages={
-            'required': error_dict['required'],
-            'min_length': error_dict['min_length'].format("Password", "8"),
+            'required': "Password is a required field",
+            'min_length': "Password must have at least 8 characters",
             'max_length': 'Password cannot be more than 30 characters',
-            'invalid': error_dict['invalid_password'],
+            'invalid':'Password must have at least a number, and a least an uppercase and a lowercase letter.',
         }
     )
     # Ensure that the first_name does not have a space in between.
@@ -61,8 +61,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         allow_null=False,
         required=True,
         error_messages={
-            'required': error_dict['required'],
-            'invalid': error_dict['invalid_name'].format('Last name')
+            'required': "Username is a required field",
+            'invalid': "Name cannot have spaces or special characters."
         }
     )
 
@@ -106,17 +106,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     """Login serializer Class"""
-    email = serializers.CharField(max_length=255)
+    user_name = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
 
     @staticmethod
     def validate(data):
-        # The `validate` method is where we make sure that the current
-        # instance of `LoginSerializer` has "valid". In the case of logging a
-        # user in, this means validating that they've provided an email
-        # and password and that this combination matches one of the users in
-        # our database.
         email = data.get('email', None)
         password = data.get('password', None)
 

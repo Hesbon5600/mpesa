@@ -39,7 +39,6 @@ class RegistrationAPIView(generics.CreateAPIView):
 class LoginAPIView(generics.CreateAPIView):
     # Login user class
     permission_classes = (AllowAny,)
-    renderer_classes = (RequestJSONRenderer,)
     serializer_class = LoginSerializer
 
     def post(self, request):
