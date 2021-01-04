@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', '')
+SECRET_KEY = os.getenv('SECRET_KEY', 'mysecretkey')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -168,9 +168,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 # https://developer.safaricom.co.ke/b2c/apis/post/paymentrequest
 
 # Consumer Key
-MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY', '')
+MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY', 'g24GyagbFSXZFcNHKNxagHX3tLKC0dpx')
 # Consumer Secret
-MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET', '')
+MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET', 'LDWFOpNSNREGwnia')
 
 MPESA_PASSKEY = os.getenv('MPESA_PASSKEY', '')
 # PartyA
